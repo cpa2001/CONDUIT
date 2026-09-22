@@ -1,0 +1,5 @@
+input_max_length: 8192,8192,8192,8192
+datasets: cars196,food101,inat2021,sun397
+generation_max_length: 128,128,128,128
+test_files: ICL/cars196_K8.json,ICL/food101_K8.json,ICL/inat2021_K8.json,ICL/sun397_K8.json
+use_chat_template: true

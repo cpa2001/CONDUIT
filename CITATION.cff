@@ -1,0 +1,70 @@
+cff-version: 1.2.0
+message: "If you use this work in your research, please cite the paper below."
+title: "CONDUIT: A Unified Residual-Stream Restoration Framework for KV Cache Reuse in Vision-Language Models"
+authors:
+  - family-names: Chen
+    given-names: Pengan
+  - family-names: Zheng
+    given-names: Kaisheng
+  - family-names: Hong
+    given-names: Liang
+  - family-names: Yi
+    given-names: Lixia
+  - family-names: Jiang
+    given-names: Jiyue
+  - family-names: Chen
+    given-names: Jiayang
+  - family-names: Wang
+    given-names: Yixuan
+  - family-names: Fan
+    given-names: Yimin
+  - family-names: Liu
+    given-names: Xinyuan
+  - family-names: Li
+    given-names: Jiayi
+  - family-names: Zhang
+    given-names: Zhanqiu
+  - family-names: Guo
+    given-names: Yiwen
+  - family-names: Li
+    given-names: Yu
+year: 2026
+identifiers:
+  - type: other
+    value: "arXiv:2609.05821"
+    description: arXiv
+url: "https://arxiv.org/abs/2609.05821"
+license: MIT
+preferred-citation:
+  type: conference
+  title: "CONDUIT: A Unified Residual-Stream Restoration Framework for KV Cache Reuse in Vision-Language Models"
+  authors:
+    - family-names: Chen
+      given-names: Pengan
+    - family-names: Zheng
+      given-names: Kaisheng
+    - family-names: Hong
+      given-names: Liang
+    - family-names: Yi
+      given-names: Lixia
+    - family-names: Jiang
+      given-names: Jiyue
+    - family-names: Chen
+      given-names: Jiayang
+    - family-names: Wang
+      given-names: Yixuan
+    - family-names: Fan
+      given-names: Yimin
+    - family-names: Liu
+      given-names: Xinyuan
+    - family-names: Li
+      given-names: Jiayi
+    - family-names: Zhang
+      given-names: Zhanqiu
+    - family-names: Guo
+      given-names: Yiwen
+    - family-names: Li
+      given-names: Yu
+  year: 2026
+  collection-title: "Findings of the Association for Computational Linguistics: EMNLP 2026"
+  url: "https://arxiv.org/abs/2609.05821"

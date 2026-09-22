@@ -1,0 +1,5 @@
+input_max_length: 8192
+datasets: mmlongdoc
+generation_max_length: 128
+test_files: documentQA/mmlongdoc_K8.jsonl
+use_chat_template: true

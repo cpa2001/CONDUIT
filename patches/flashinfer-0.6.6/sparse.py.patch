@@ -1,0 +1,75 @@
+--- a/flashinfer/sparse.py
++++ b/flashinfer/sparse.py
+@@ -1085,20 +1085,36 @@
+         # reshape to pad num_kv_heads into seq_len
+         # input [num_qo_heads, qo_len, head_dim]
+         # kernel layout is NHD -> [qo_len * num_kv_heads, gqa_group_size, head_dim]
+-        q = einops.rearrange(
++        if self._kv_layout == "HND":
++            q = einops.rearrange(
++                q,
++                "(num_kv_heads gqa_group_size) qo_len head_dim -> (num_kv_heads qo_len) gqa_group_size head_dim",
++                num_kv_heads=self._num_kv_heads,
++            ).contiguous()
++            # HND -> [kv_len * num_kv_heads (num_pages), 1 (page_size), 1 (new_num_kv_heads), head_dim]
++            k = einops.rearrange(
++                k,
++                "num_kv_heads kv_len head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
++            ).contiguous()
++            v = einops.rearrange(
++                v,
++                "num_kv_heads kv_len head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
++            ).contiguous()
++        else:
++            q = einops.rearrange(
+             q,
+-            "(num_kv_heads gqa_group_size) qo_len head_dim -> (num_kv_heads qo_len) gqa_group_size head_dim",
++            "qo_len (num_kv_heads gqa_group_size) head_dim -> (num_kv_heads qo_len) gqa_group_size head_dim",
+             num_kv_heads=self._num_kv_heads,
+-        ).contiguous()
+-        # HND -> [kv_len * num_kv_heads (num_pages), 1 (page_size), 1 (new_num_kv_heads), head_dim]
+-        k = einops.rearrange(
+-            k,
+-            "num_kv_heads kv_len head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
+-        ).contiguous()
+-        v = einops.rearrange(
+-            v,
+-            "num_kv_heads kv_len head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
+-        ).contiguous()
++            ).contiguous()
++            # NHD -> [kv_len * num_kv_heads (num_pages), 1 (page_size), 1 (new_num_kv_heads), head_dim]
++            k = einops.rearrange(
++                k,
++                "kv_len num_kv_heads head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
++            ).contiguous()
++            v = einops.rearrange(
++                v,
++                "kv_len num_kv_heads head_dim -> (num_kv_heads kv_len) 1 1 head_dim",
++            ).contiguous()
+ 
+         if return_lse:
+             if lse is None:
+@@ -1152,11 +1168,18 @@
+         )
+ 
+         # [qo_len * num_kv_heads, gqa_group_size, head_dim] -> HND
+-        out = einops.rearrange(
+-            out,
+-            "(num_kv_heads qo_len) gqa_group_size head_dim -> (num_kv_heads gqa_group_size) qo_len head_dim",
+-            num_kv_heads=self._num_kv_heads,
+-        ).contiguous()
++        if self._kv_layout == "HND":
++            out = einops.rearrange(
++                out,
++                "(num_kv_heads qo_len) gqa_group_size head_dim -> num_kv_heads (qo_len gqa_group_size) head_dim",
++                num_kv_heads=self._num_kv_heads,
++            ).contiguous()
++        else:
++            out = einops.rearrange(
++                out,
++                "(num_kv_heads qo_len) gqa_group_size head_dim -> qo_len (num_kv_heads gqa_group_size) head_dim",
++                num_kv_heads=self._num_kv_heads,
++            ).contiguous()
+ 
+         if return_lse:
+             lse = einops.rearrange(

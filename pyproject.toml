@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conduit"
+version = "0.1.0"
+authors = [
+    { name = "Pengan Chen" },
+    { name = "Kaisheng Zheng" },
+    { name = "Liang Hong" },
+    { name = "Lixia Yi" },
+    { name = "Jiyue Jiang" },
+    { name = "Jiayang Chen" },
+    { name = "Yixuan Wang" },
+    { name = "Yimin Fan" },
+    { name = "Xinyuan Liu" },
+    { name = "Jiayi Li" },
+    { name = "Zhanqiu Zhang" },
+    { name = "Yiwen Guo" },
+    { name = "Yu Li" },
+]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+description = "A unified residual-stream restoration framework for KV cache reuse in vision-language models"
+requires-python = ">=3.10,<3.13"
+# torch, flash-attn and flashinfer-python are deliberately absent. Each must
+# match the local CUDA toolkit, and flash-attn compiles against an already
+# installed torch, so resolving them here breaks a clean install. README lists
+# the verified versions and the order to install them in.
+dependencies = [
+    "transformers>=4.51.0",
+    "qwen-vl-utils>=0.0.14",
+    "xxhash",
+]
+
+# Note: flashinfer 0.6.6 needs an extra patch -- see patches/README.md.
+# It is deliberately not listed in `dependencies`, because after pip installs
+# it you still have to run
+#   bash scripts/apply_flashinfer_patch.sh
+
+[project.urls]
+Paper = "https://arxiv.org/abs/2609.05821"
+Homepage = "https://github.com/cpa2001/CONDUIT"
+
+[tool.setuptools.packages.find]
+where = ["."]
+# The Python package keeps the name `nanovllm`: it marks the fact that this
+# code is a fork of nano-vllm. `conduit` is the method, `nanovllm` the engine.
+include = ["nanovllm*"]

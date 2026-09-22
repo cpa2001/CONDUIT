@@ -1,0 +1,10 @@
+input_max_length: 32768,32768,32768
+datasets: mmlongdoc,mmlongdoc,mmlongdoc
+generation_max_length: 1,1,1
+test_files: documentQA/mmlongdoc_K4.jsonl,documentQA/mmlongdoc_K8.jsonl,documentQA/mmlongdoc_K16.jsonl
+test_length: 4,8,16
+use_chat_template: true
+do_sample: false
+max_test_samples: 16
+docqa_llm_judge: false
+skip_existing: false

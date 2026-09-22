@@ -1,0 +1,5 @@
+input_max_length: 8192
+datasets: cars196
+generation_max_length: 128
+test_files: ICL/cars196_K8.json
+use_chat_template: true

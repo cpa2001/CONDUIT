@@ -1,0 +1,5 @@
+input_max_length: 16384
+datasets: infoseek
+generation_max_length: 128
+test_files: vrag/infoseek_K8_dep3.jsonl
+use_chat_template: true

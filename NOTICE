@@ -1,0 +1,79 @@
+CONDUIT
+Copyright (c) 2026 The Chinese University of Hong Kong
+Copyright (c) 2026 Tencent
+
+Paper: CONDUIT: A Unified Residual-Stream Restoration Framework for KV Cache
+Reuse in Vision-Language Models -- arXiv:2609.05821
+The author list is in the citation section of README and in pyproject.toml.
+
+This project includes the third-party works listed below.
+
+
+================================================================================
+nano-vllm
+--------------------------------------------------------------------------------
+  https://github.com/GeeeekExplorer/nano-vllm
+  MIT License -- see LICENSE at the root of this repository
+
+  `nanovllm/` is derived from that project with substantial modifications:
+  position-independent image KV cache reuse, selective recomputation (kv_score),
+  and the corresponding split of the model runner.
+
+
+================================================================================
+VLMEvalKit
+--------------------------------------------------------------------------------
+  https://github.com/open-compass/VLMEvalKit
+  Apache License 2.0 -- see benchmark/VLMEvalKit/LICENSE
+  Copyright 2023 VLMEvalKit Authors
+
+  Vendored under benchmark/VLMEvalKit/. Identical to upstream except for the
+  files below:
+
+    vlmeval/config.py                 adds the NanoVLLM model entries and the
+                                      weight-path resolver
+    vlmeval/vlm/nanovllm.py           the NanoVLLM wrapper added by this project
+    vlmeval/vlm/internvl.py           replaced by a hint pointing at the
+                                      NanoVLLM entries
+    vlmeval/vlm/qwen2_vl/__init__.py  same as above
+    vlmeval/vlm/qwen3_vl.py           replaced by a stub (this checkout does not
+                                      bundle that wrapper)
+    vlmeval/vlm/qwen_vl.py            replaced by a stub (same reason)
+    scripts/                          experiment scripts added by this project
+
+  This list exists to locate the differences when syncing with upstream later.
+
+
+================================================================================
+MMLongBench
+--------------------------------------------------------------------------------
+  Code:    https://github.com/EdinburghNLP/MMLongBench
+  Dataset: https://huggingface.co/datasets/ZhaoweiWang/MMLongBench
+  MIT License, Copyright (c) 2021 HKUST-KnowComp
+  -- see benchmark/MMLongBench/LICENSE
+
+  Vendored under benchmark/MMLongBench/. The upstream evaluation code is kept
+  as is; benchmark/MMLongBench/scripts/ holds the experiment scripts added by
+  this project.
+
+  Additional terms of use for the dataset (from the "Misuse for malicious
+  purposes" section of the upstream README, separate from the code license
+  above): the dataset is intended solely to support research and development of
+  long-context vision-language models. It must not be used to generate or
+  spread false, misleading or harmful content, nor for activities involving
+  privacy violation, fraud, discrimination, harassment, violence, pornography
+  or any unlawful purpose; and it must not be used to train, fine-tune or
+  deploy models or applications that violate laws, regulations or ethical
+  guidelines.
+
+
+================================================================================
+FlashInfer
+--------------------------------------------------------------------------------
+  https://github.com/flashinfer-ai/flashinfer
+  Apache License 2.0
+
+  patches/flashinfer-0.6.6/sparse.py is a modified version of
+  flashinfer/sparse.py from release 0.6.6, and
+  patches/flashinfer-0.6.6/sparse.py.patch is the diff against upstream.
+  What the patch changes and how to apply it are described in patches/README.md.

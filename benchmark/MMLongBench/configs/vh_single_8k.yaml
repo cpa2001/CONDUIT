@@ -1,0 +1,5 @@
+input_max_length: 8192
+datasets: vh_single
+generation_max_length: 128
+test_files: NIAH/vh_single_test_1000_K8_dep6.jsonl
+use_chat_template: true

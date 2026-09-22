@@ -1,0 +1,5 @@
+input_max_length: 8192,8192
+datasets: gov-report,multi-lexsum
+generation_max_length: 384,384
+test_files: summ/gov_K8.jsonl,summ/lexsum_K8.jsonl
+use_chat_template: true

@@ -1,0 +1,6 @@
+input_max_length: 8192
+datasets: image-reuse
+generation_max_length: 8
+test_files: image_reuse/image-reuse_K8.jsonl
+use_chat_template: true
+max_test_samples: 300
